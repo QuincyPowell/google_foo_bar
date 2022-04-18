@@ -1,4 +1,4 @@
-def elimiate_div_and_multiples(div:int, possible_divs:list[int]) -> None:
+def eliminate_div_and_multiples(div:int, possible_divs:list[int]) -> None:
     multiplyer = 1
     while True:
         current_div = div * multiplyer
@@ -8,7 +8,7 @@ def elimiate_div_and_multiples(div:int, possible_divs:list[int]) -> None:
         multiplyer += 1
 
 def check_div(div:int, s:str) -> bool:
-    div_width = len(s) // div_width
+    div_width = len(s) // div
     if (len(s) % div_width != 0):
         return False
     
@@ -16,11 +16,12 @@ def check_div(div:int, s:str) -> bool:
         ltr = s[n]
         multiplyer = 1
         while True:
-            ptr = (div_width * multiplyer) + n
-            if (ptr >= len(s)):
+            idx = (div_width * multiplyer) + n
+            if (idx >= len(s)):
                 break
-            if(s[ptr] != ltr):
+            if(s[idx] != ltr):
                 return False
+            multiplyer += 1
         return True
 
 def check_div1(s:str) -> bool:
@@ -36,16 +37,17 @@ def solution(s:str) -> int:
     if (len(s) == 1):
         return 1
     if (check_div1(s)):
-        return 1
+        return len(s)
     
-    possible_divs = range(2, len(s))
-    ptr = 0
+    possible_divs = list(range(2, len(s)))
+    idx = 0
     while True:
-        if (ptr >= len(possible_divs)):
+        if (idx >= len(possible_divs)):
             break
-        if (not check_div(possible_divs[ptr], s)):
-            elimiate_div_and_multiples(possible_divs[ptr], possible_divs)
-        ptr += 1
+        if (not check_div(possible_divs[idx], s)):
+            eliminate_div_and_multiples(possible_divs[idx], possible_divs)
+        else:
+            idx += 1
     
     if (possible_divs):
         return possible_divs[-1]
