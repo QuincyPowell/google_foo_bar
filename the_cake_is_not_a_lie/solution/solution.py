@@ -1,37 +1,37 @@
-def eliminate_div_and_multiples(div:int, possible_divs:list[int]) -> None:
-    multiplyer = 1
+def eliminate_div_and_multiples(div, possible_divs):
+    multiplier = 1
     while True:
-        current_div = div * multiplyer
+        current_div = div * multiplier
         if (not current_div in possible_divs):
             break
         possible_divs.remove(current_div)
-        multiplyer += 1
+        multiplier += 1
 
-def check_div(div:int, s:str) -> bool:
+def check_div(div, s):
     div_width = len(s) // div
     if (len(s) % div_width != 0):
         return False
     
     for n in range(0, div_width):
         ltr = s[n]
-        multiplyer = 1
+        multiplier = 1
         while True:
-            idx = (div_width * multiplyer) + n
+            idx = (div_width * multiplier) + n
             if (idx >= len(s)):
                 break
             if(s[idx] != ltr):
                 return False
-            multiplyer += 1
+            multiplier += 1
         return True
 
-def check_div1(s:str) -> bool:
+def check_div1(s):
     ltr = s[0]
     for n in range (1, len(s)):
         if (ltr != s[n]):
             return False
     return True
                             
-def solution(s:str) -> int:
+def solution(s):
     if (not s):
         return 0
     if (len(s) == 1):
