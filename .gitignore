@@ -1,0 +1,10 @@
+secrets/*
+secrets*
+__pycache__
+__pycache__/*
+*.kate-swp
+*.H5
+*.h5
+*.pickle
+*.log
+tinker.py
