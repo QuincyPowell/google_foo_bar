@@ -1,5 +1,5 @@
 import unittest
-from solution import check_div1
+from solution import check_all_same_char
 
 class Tests(unittest.TestCase):
     @classmethod
@@ -16,12 +16,12 @@ class Tests(unittest.TestCase):
     def tearDown(self):
         pass
     
-    def test_check_div1_2(self):
+    def test_check_all_same_char_2(self):
         input_str = 'aa'
-        output = check_div1(input_str)
+        output = check_all_same_char(input_str)
         self.assertTrue(output)
     
-    def test_check_div1_5(self):
+    def test_check_all_same_char_5(self):
         input_str = 'qqqqq'
-        output = check_div1(input_str)
+        output = check_all_same_char(input_str)
         self.assertTrue(output)

@@ -1,13 +1,4 @@
-def eliminate_div_and_multiples(div, possible_divs):
-    multiplier = 1
-    while True:
-        current_div = div * multiplier
-        if (not current_div in possible_divs):
-            break
-        possible_divs.remove(current_div)
-        multiplier += 1
-
-def check_div(div, s):
+def check_divisor(div, s):
     div_width = len(s) // div
     if (len(s) % div_width != 0):
         return False
@@ -24,7 +15,25 @@ def check_div(div, s):
             multiplier += 1
         return True
 
-def check_div1(s):
+def find_next_divisor(s):
+    primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
+    prime_idx = 0
+    
+    max_divisor = len(s) // 2
+    
+    while (max_divisor >= primes[prime_idx]):
+        if (len(s) % primes[prime_idx] != 0):
+            prime_idx += 1
+            continue
+        if (check_divisor(primes[prime_idx], s)):
+            return primes[prime_idx]
+        else:
+            prime_idx +=1
+            continue
+    return None
+        
+
+def check_all_same_char(s):
     ltr = s[0]
     for n in range (1, len(s)):
         if (ltr != s[n]):
@@ -36,20 +45,18 @@ def solution(s):
         return 0
     if (len(s) == 1):
         return 1
-    if (check_div1(s)):
+    if (check_all_same_char(s)):
         return len(s)
     
-    possible_divs = list(range(2, len(s)))
-    idx = 0
-    while True:
-        if (idx >= len(possible_divs)):
-            break
-        if (not check_div(possible_divs[idx], s)):
-            eliminate_div_and_multiples(possible_divs[idx], possible_divs)
-        else:
-            idx += 1
-    
-    if (possible_divs):
-        return possible_divs[-1]
-    else:
-        return 1
+    divisors = [1,]
+    next_divisor = find_next_divisor(s)
+    while (next_divisor is not None):
+        division_width = len(s) // next_divisor
+        divisors.append(next_divisor)
+        s = s[0:division_width]
+        next_divisor = find_next_divisor(s)
+        
+    total_divisions = divisors.pop(0)
+    while (divisors):
+        total_divisions *= divisors.pop()
+    return total_divisions
