@@ -145,3 +145,15 @@ class Tests(unittest.TestCase):
         expected_output = 12
         output = solution(input_str)
         self.assertEqual(expected_output, output)
+    
+    def test_palindrome_pattern_1(self):
+        input_str = 'aaccaaaaccaa'
+        expected_output = 2
+        output = solution(input_str)
+        self.assertEqual(expected_output, output)
+        
+    def test_palindrome_pattern_2(self):
+        input_str = 'qwerewqqwerewq'
+        expected_output = 2
+        output = solution(input_str)
+        self.assertEqual(expected_output, output)
